@@ -11,12 +11,25 @@ import { PrismaClient } from "@prisma/client";
 import { CreditCardPayment } from "../payments/CreditCardPayment";
 import { DebitCardPayment } from "../payments/DebitCardPayment";
 import { PixPayment } from "../payments/PixPayment";
+import { InvalidEnvError } from "./errors";
+import { ConsoleMailProvider } from "../providers/ConsoleMailProvider";
+import { InMemoryOrderRepository } from "../repositories/InMemoryOrderRepository";
+
+const env = process.env.APP_ENV;
 
 export const container = new Container();
 
-container.bind(TYPES.MailProvider).to(EtherealMailProvider).inSingletonScope();
+if (env === 'test') {
+  container.bind(TYPES.MailProvider).to(ConsoleMailProvider).inSingletonScope();
+  container.bind(TYPES.OrderRepo).to(InMemoryOrderRepository).inSingletonScope();
+} else if (env === 'dev') {
+  container.bind(TYPES.MailProvider).to(EtherealMailProvider).inSingletonScope();
+  container.bind(TYPES.OrderRepo).to(PrismaOrderRepository).inSingletonScope();
+} else {
+  throw new InvalidEnvError('APP_ENV inválida!');
+}
+
 container.bind(TYPES.ProductRepo).to(PrismaProductRepository).inSingletonScope();
-container.bind(TYPES.OrderRepo).to(PrismaOrderRepository).inSingletonScope();
 container.bind(TYPES.PaymentMethodReg).to(PaymentMethodRegistry);
 container.bind(TYPES.NotificationService).to(NotificationService);
 container.bind(TYPES.OrderService).to(OrderService);
