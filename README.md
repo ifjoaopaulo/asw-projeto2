@@ -4,6 +4,8 @@ Neste repositório está a versão finalizada do projeto 2 de Arquitetura de Sof
 
 Ao fim da seção "Como rodar" está o método utilizado para escolher o "modo de execução" do programa, de acordo ao exigido (variável .env).
 
+Observação: Eu optei por usar a versão do código dada pelo professor, por motivos de consistência. A minha versão da solução do projeto 1 está em um repositório separado.
+
 ## Como rodar
 
 ```bash
