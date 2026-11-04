@@ -22,7 +22,7 @@ export const container = new Container();
 if (env === 'test') {
   container.bind(TYPES.MailProvider).to(ConsoleMailProvider).inSingletonScope();
   container.bind(TYPES.OrderRepo).to(InMemoryOrderRepository).inSingletonScope();
-} else if (env === 'dev') {
+} else if (env === 'dev' || env === undefined) {
   container.bind(TYPES.MailProvider).to(EtherealMailProvider).inSingletonScope();
   container.bind(TYPES.OrderRepo).to(PrismaOrderRepository).inSingletonScope();
 } else {
