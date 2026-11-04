@@ -38,8 +38,6 @@ Para mudar o modo, é necessário criar o arquivo .env (ou alterá-lo, caso já 
 
 Caso o valor inserido seja diferente do especificado nos exemplos, o programa dará erro de APP_ENV inválida.
 
----
-
 ## Critérios de aceite
 
 1. Clonar, instalar, migrar, popular e rodar funcionam sem erro.
