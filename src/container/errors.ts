@@ -1,1 +1,1 @@
-export class InvalidEnvError extends Error { };
+export class InvalidEnvError extends Error {}

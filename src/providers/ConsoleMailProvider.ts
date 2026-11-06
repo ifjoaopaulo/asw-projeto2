@@ -7,10 +7,10 @@ export class ConsoleMailProvider implements IMailProvider {
   async sendMail(mail: Mail): Promise<string | null> {
     logger.info(
       `[CONSOLE MAIL PROVIDER] ` +
-      `Para: ${mail.to} ` +
-      `${mail.subject} ` +
-      `${mail.text}`
-    )
+        `Para: ${mail.to} ` +
+        `${mail.subject} ` +
+        `${mail.text}`,
+    );
 
     return null;
   }

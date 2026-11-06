@@ -1,7 +1,7 @@
-import { injectable } from 'inversify';
-import nodemailer, { Transporter } from 'nodemailer';
-import logger from '../lib/logger';
-import { IMailProvider, Mail } from './IMailProvider';
+import { injectable } from "inversify";
+import nodemailer, { Transporter } from "nodemailer";
+import logger from "../lib/logger";
+import { IMailProvider, Mail } from "./IMailProvider";
 
 @injectable()
 export class EtherealMailProvider implements IMailProvider {
@@ -9,7 +9,10 @@ export class EtherealMailProvider implements IMailProvider {
 
   async sendMail(mail: Mail): Promise<string | null> {
     const transporter = await this.getTransporter();
-    const info = await transporter.sendMail({ from: '"DevStore" <noreply@devstore.com>', ...mail });
+    const info = await transporter.sendMail({
+      from: '"DevStore" <noreply@devstore.com>',
+      ...mail,
+    });
     return nodemailer.getTestMessageUrl(info) || null;
   }
 

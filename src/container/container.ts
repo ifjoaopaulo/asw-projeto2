@@ -19,17 +19,26 @@ const env = process.env.APP_ENV;
 
 export const container = new Container();
 
-if (env === 'test') {
+if (env === "test") {
   container.bind(TYPES.MailProvider).to(ConsoleMailProvider).inSingletonScope();
-  container.bind(TYPES.OrderRepo).to(InMemoryOrderRepository).inSingletonScope();
-} else if (env === 'dev' || env === undefined) {
-  container.bind(TYPES.MailProvider).to(EtherealMailProvider).inSingletonScope();
+  container
+    .bind(TYPES.OrderRepo)
+    .to(InMemoryOrderRepository)
+    .inSingletonScope();
+} else if (env === "dev" || env === undefined) {
+  container
+    .bind(TYPES.MailProvider)
+    .to(EtherealMailProvider)
+    .inSingletonScope();
   container.bind(TYPES.OrderRepo).to(PrismaOrderRepository).inSingletonScope();
 } else {
-  throw new InvalidEnvError('APP_ENV inválida!');
+  throw new InvalidEnvError("APP_ENV inválida!");
 }
 
-container.bind(TYPES.ProductRepo).to(PrismaProductRepository).inSingletonScope();
+container
+  .bind(TYPES.ProductRepo)
+  .to(PrismaProductRepository)
+  .inSingletonScope();
 container.bind(TYPES.PaymentMethodReg).to(PaymentMethodRegistry);
 container.bind(TYPES.NotificationService).to(NotificationService);
 container.bind(TYPES.OrderService).to(OrderService);
